@@ -1,0 +1,234 @@
+
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' 'unsafe-inline' https://fonts.gstatic.com; img-src 'self' data: blob: https://pfst.cf2.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com; media-src 'self' data: blob: https://pfst.cf2.poecdn.net https://i.imgur.com https://wikimedia.org; frame-src 'self' https://www.youtube.com; upgrade-insecure-requests; block-all-mixed-content;">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Project 9: Rogue</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #c0c0c0;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #ffcc00;
+        }
+        a {
+            color: #ff6600;
+        }
+        pre, code {
+            background-color: #2e2e2e;
+            color: #c0c0c0;
+            padding: 10px;
+            display: block;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .code {
+            background-color: #2e2e2e;
+            color: #c0c0c0;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #444;
+            margin: 10px 0;
+        }
+        ul {
+            list-style-type: square;
+            margin-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Programming Project 9</h1>
+
+<h2>Rogue</h2>
+
+<p><a href="https://www.myabandonware.com/game/rogue-4n/play-4n">Rogue</a> is a pioneering and influential video game that was first released in <strong>1980</strong>. It is considered one of the earliest and most significant examples of the "roguelike" genre, a type of role-playing game characterized by procedurally generated levels, permadeath (the player's character dying permanently), and turn-based gameplay.</p>
+
+<p>In Rogue, the player takes on the role of a character who must descend into an <strong>elaborate dungeon</strong>, <strong>battling monsters</strong>, <strong>collecting treasure</strong> and <strong>powerful items</strong>, and ultimately attempting to retrieve the Amulet of Yendor from the deepest levels. The game features a <strong>top-down, ASCII-based visual style</strong>, where the dungeon, characters, and items are <strong>represented by various keyboard characters</strong>.</p>
+
+<hr>
+
+<p>Your task is to create a <em>roguelike</em> game, evidencing your programming skills up to IGCSE standard (and beyond, if you like).</p>
+
+<p>Grade 9: A project resembling the original Rogue game.</p>
+<p>Grade 8: Tutorial completed + >= 6 additional features.</p>
+<p>Grade 7: Tutorial completed + >= 3 additional features.</p>
+<p>Grade 6: Tutorial completed up to step 28.</p>
+
+<hr>
+
+<p><strong>NOTE:</strong> For this project we will try to use the AQA naming convention of <span class="code">CamelCase</span> for everything, instead of the standard Python <span class="code">snake_case</span> (except <span class="code">CamelCase</span> for object names)</p>
+
+<hr>
+
+<ol>
+    <li>Define a variable named <span class="code">Width</span> to store the width of the grid.</li>
+    <li>Define a variable named <span class="code">Height</span> to store the height of the grid.</li>
+    <li>For now, ask the user to input the width + the height when the game first begins.</li>
+</ol>
+
+<p><em>Both width and height will be <strong>global constants</strong> - once they are set, they won't change. Because they won't change, this means we won't need to pass them in to any subroutines to be modified.</em></p>
+
+<img src="assets/y11_rogue_1.gif" alt="Exercise1">
+
+<hr>
+
+<pre>class Coordinates:
+    def __init__(self):
+        self.x = 0
+        self.y = 0
+</pre>
+
+<ol start="4">
+    <li>Use the record definition above to create a variable named <span class="code">Player</span>. This variable will store the <span class="code">x</span> and <span class="code">y</span> coordinates of the player during the game.</li>
+    <li>After you have made your <span class="code">Player</span> variable, set the <span class="code">x</span> and <span class="code">y</span> values to the <em>middle</em> of the grid, and display a message confirming this.</li>
+</ol>
+
+<img src="assets/y11_rogue_2.gif" alt="Exercise2">
+
+<hr>
+
+<ol start="6">
+    <li>Define a function named <span class="code">MovePlayer()</span> that accepts <span class="code">Player</span> and <span class="code">Direction</span> as parameters.</li>
+    <li>Update the coordinates stored inside <span class="code">Player</span> based on the direction given. For example, <span class="code">"LEFT"</span> will change the <span class="code">x</span> coordinate. <span class="code">"UP"</span> will change the <span class="code">y</span> coordinate.</li>
+    <li>Check that the new coordinates of the player have not exceeded the bounds set out by the <span class="code">Width</span> and <span class="code">Height</span> of the grid. If they have, display an error message.</li>
+</ol>
+
+<p><em>You will need to consider how 0-based indexing affects your data validation routines used here.</em></p>
+
+<ol start="9">
+    <li>If the new <span class="code">x</span> and <span class="code">y</span> position are OK, display a message telling us where the new player will be.</li>
+    <li>Return the <span class="code">Player</span> variable back from the function - unchanged if the validation failed, or updated if the new move was successful.</li>
+</ol>
+
+<p><em>Notice because we are returning a Coordinates record, we will see the memory address of the variable instead of its value. Don't worry about this at this stage!</em></p>
+
+<img src="assets/y11_rogue_3.gif" alt="Exercise3">
+<img src="assets/y11_rogue_4.gif" alt="Exercise4">
+<img src="assets/y11_rogue_5.gif" alt="Exercise5">
+
+<hr>
+
+<ol start="11">
+    <li>Next, define a function named <span class="code">MakeGrid()</span></li>
+    <li>Inside the function create an empty list named <span class="code">Grid</span> - this will be our 2D array of rows and columns representing the level in the game.</li>
+    <li>Use a nested loop to loop over the rows in the grid (<span class="code">Height</span>), and for each row - through the columns in the grid (<span class="code">Width</span>).</li>
+    <li>Inside the outer loop - create an empty list named <span class="code">Row</span>.</li>
+    <li>Inside the inner loop, append a single space <span class="code">' '</span> character to the <span class="code">Row</span>.</li>
+    <li>After the inner loop, append the <span class="code">Row</span> to the <span class="code">Grid</span>.</li>
+    <li>Insert a gold coin (<span class="code">'G'</span>) into a random location in the grid.</li>
+    <li>Return the grid from the function.</li>
+</ol>
+
+<img src="assets/y11_rogue_6.gif" alt="Exercise6">
+
+<hr>
+
+<ol start="19">
+    <li>The next subroutine will be a procedure named <span class="code">DisplayGrid()</span> that accepts two parameters: <span class="code">Player</span> and <span class="code">Grid</span>.</li>
+    <li>Add the following code to your main method at the bottom of the program so we can test the game so far:</li>
+</ol>
+
+<pre>Grid = MakeGrid() 
+DisplayGrid(Player, Grid) 
+</pre>
+
+<p><em>These lines should be executed after the intro to the game is displayed, and after the user has been asked to enter the width and the height of the grid.</em></p>
+
+<ol start="21">
+    <li>Make it so that the procedure loops through every <span class="code">Row</span> in <span class="code">Grid</span>, and then through every <span class="code">Cell</span> in each <span class="code">Row</span>. Print out one <span class="code">Cell</span> character per iteration of the inner loop.</li>
+</ol>
+
+<p><em>You will need to consider when to print on the same line, and when the print should instead trigger a new line!</em></p>
+
+<p>At the moment the grid is filled with spaces, so the only thing we will see is the gold coin <span class="code">'G'</span> placed in a random location:</p>
+
+<img src="assets/y11_rogue_7.gif" alt="Exercise7">
+
+<ol start="22">
+    <li>Next step is to add the left-hand and right-hand walls to the dungeon - each row should be preceded with a "|" and ended with another "|".</li>
+</ol>
+
+<img src="assets/y11_rogue_8.gif" alt="Exercise8">
+
+<ol start="23">
+    <li>Now add the top and bottom walls to the dungeon. Use <em>string replication</em> and the <span class="code">Width</span> constant to help you here.</li>
+</ol>
+
+<img src="assets/y11_rogue_9.gif" alt="Exercise9">
+
+<ol start="24">
+    <li>We now need to display the <span class="code">Player</span> <span class="code">'P'</span> in the correct location each time the grid is printed. To do this you will need to change your nested loop so it counts the rows (<span class="code">y</span>) and columns (<span class="code">x</span>) as you iterate through each cell in the grid.</li>
+</ol>
+
+<p>During each iteration of the inner loop check if current coordinates match the player's coordinates. If they do, print a <span class="code">'P'</span> to represent the player. If they don't, print the <span class="code">Cell</span> from the grid instead.</p>
+
+<img src="assets/y11_rogue_10.gif" alt="Exercise10">
+
+<hr>
+
+<ol start="25">
+    <li>Create a main game loop so the player can continue to make turns, while they are still alive. Decide on the correct variable / data type for your main loop condition.</li>
+    <li>Inside the main loop, ask the user to input the direction the player would like to go. If the user enters an invalid direction, just ignore it and continue to the next iteration of the main loop. If the direction was valid, display a confirmation message.</li>
+</ol>
+
+<img src="assets/y11_rogue_11.gif" alt="Exercise11">
+
+<ol start="27">
+    <li>Next - still inside the main loop - place calls to <span class="code">MovePlayer()</span> and <span class="code">DisplayGrid()</span>. When calling your subroutines you will need to consider:
+        <ol type="a">
+            <li>what variables should be passed in as parameters</li>
+            <li>what variables should be returned back from the functions after being modified</li>
+        </ol>
+    </li>
+</ol>
+
+<img src="assets/y11_rogue_12.gif" alt="Exercise12">
+
+<ol start="27">
+    <li>To refresh the screen after each move, add the line of code...</li>
+</ol>
+
+<pre>system('clear')
+</pre>
+
+<p>...to clear the screen after the player has input a new direction. You will need to make sure that the <span class="code">system()</span> function has been imported from the <span class="code">os</span> library first.</p>
+
+<ol start="28">
+    <li>You can use the <span class="code">sleep()</span> function from the <span class="code">time()</span> library to add a short delay when <em>loading the game</em>.</li>
+</ol>
+
+<img src="assets/y11_rogue_13.gif" alt="Exercise13">
+
+<ol start="29">
+    <li>That's all for now, you're on your own - here's a <em>high level overview</em> of some function ideas to extend the project:</li>
+</ol>
+
+<ul>
+    <li><span class="code">CheckCoinCollected(Grid, Player)</span></li>
+    <li><span class="code">IncreaseScore(Score)</span></li>
+    <li><span class="code">PlaceEnemy(Enemies)</span></li>
+    <li><span class="code">MoveEnemy(Enemies)</span></li>
+    <li><span class="code">DisplayGrid(Player, Grid, Enemies)</span></li>
+    <li><span class="code">CheckEnemyCollision(Player, Enemies)</span></li>
+    <li><span class="code">CheckGameOver(Lives)</span></li>
+    <li><span class="code">OpenNewDungeon(Grid)</span></li>
+    <li><span class="code">GenerateDungeons()</span></li>
+</ul>
+
+<hr>
+
+<p>Good luck!</p>
+
+
+
+</body></html>
